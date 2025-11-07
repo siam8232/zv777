@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>zv 777 - Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        h1, h2 {
+            color: #1c1e21;
+            text-align: center;
+        }
+
+        /* Page Navigation */
+        .page {
+            display: none; /* All pages hidden by default */
+        }
+        .page.active {
+            display: block; /* Active page is shown */
+        }
+
+        /* Header (back button) */
+        .page-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .back-btn {
+            background: #e4e6eb;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            color: #050505;
+            margin-right: 15px;
+        }
+        .back-btn:hover {
+            background: #d8dbdf;
+        }
+
+        /* Home Page Buttons */
+        #home-page .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .menu-btn {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 40px 20px;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+        }
+        .menu-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+        }
+        .menu-btn.story { background: linear-gradient(135deg, #28a745, #218838); }
+        .menu-btn.viral { background: linear-gradient(135deg, #17a2b8, #138496); }
+        .menu-btn.upload { background: linear-gradient(135deg, #dc3545, #c82333); }
+
+        /* Watch Now Page */
+        #filter-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #filter-container select {
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        #video-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        .video-item {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fafafa;
+            cursor: pointer;
+        }
+        .video-item:hover { background: #f1f1f1; }
+        .video-item h3 { margin-top: 0; }
+        .video-item .categories {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* Video Player & Story Viewer */
+        #video-player-container, #story-viewer {
+            margin-top: 20px;
+        }
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 8px;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .share-section {
+            margin-top: 15px;
+        }
+        .share-section input {
+            width: calc(100% - 80px);
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .share-section button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        /* Story Corner Page */
+        #story-list {
+            list-style: none;
+            padding: 0;
+        }
+        #story-list li {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+        #story-list li:hover { background: #f9f9f9; }
+        #story-list img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        #story-viewer img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        #story-content {
+            font-size: 17px;
+            line-height: 1.7;
+            white-space: pre-wrap; /* This preserves formatting */
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        /* Viral Videos Page */
+        #viral-page p {
+            font-size: 18px;
+            line-height: 1.6;
+            text-align: center;
+        }
+        .telegram-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            max-width: 300px;
+            margin: 30px auto;
+            padding: 15px 20px;
+            background-color: #0088cc;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .telegram-btn i {
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        .telegram-btn:hover {
+            background-color: #0077b3;
+        }
+
+        /* Upload Video Page */
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* Important for 100% width */
+        }
+        .form-group select {
+            appearance: none; /* Optional: for custom styling */
+        }
+        .submit-btn {
+            background-color: #28a745;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .submit-btn:hover {
+            background-color: #218838;
+        }
+        #upload-message {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="app">
+
+            <div id="home-page" class="page active">
+                <h1>zv 777</h1>
+                <div class="button-grid">
+                    <button class="menu-btn watch" onclick="showPage('watch-page')">
+                        Watch Now<br/>এখন দেখুন
+                    </button>
+                    <button class="menu-btn story" onclick="showPage('story-page')">
+                        Story Corner<br/>গল্পের আসর
+                    </button>
+                    <button class="menu-btn viral" onclick="showPage('viral-page')">
+                        Viral Videos<br/>ভাইরাল ভিডিও
+                    </button>
+                    <button class="menu-btn upload" onclick="showPage('upload-page')">
+                        Upload Your Video<br/>আপনার ভিডিও আপলোড করুন
+                    </button>
+                </div>
+            </div>
+
+            <div id="watch-page" class="page">
+                <div class="page-header">
+                    <button class="back-btn" onclick="showPage('home-page')">❮ Back</button>
+                    <h2>Watch Now (এখন দেখুন)</h2>
+                </div>
+                
+                <div id="filter-container">
+                    <select id="category-filter" onchange="filterVideos()">
+                        <option value="all">All Categories (সব ক্যাটাগরি)</option>
+                        </select>
+                </div>
+                
+                <div id="video-list-container">
+                    <h3>Available Videos (ভিডিও তালিকা)</h3>
+                    <div id="video-list">
+                        </div>
+                </div>
+
+                <div id="video-player-container" style="display: none;">
+                    <h3 id="video-title"></h3>
+                    <div class="video-wrapper">
+                        <iframe id="video-iframe" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    </div>
+                    <div class="share-section">
+                        <label>Share Link (লিঙ্ক শেয়ার করুন):</label>
+                        <input type="text" id="video-share-link" readonly>
+                        <button onclick="copyLink('video-share-link')">Copy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="story-page" class="page">
+                <div class="page-header">
+                    <button class="back-btn" onclick="showPage('home-page')">❮ Back</button>
+                    <h2>Story Corner (গল্পের আসর)</h2>
+                </div>
+
+                <ul id="story-list">
+                    </ul>
+
+                <div id="story-viewer" style="display: none;">
+                    <img id="story-image" src="" alt="Story Image">
+                    <h3 id="story-title"></h3>
+                    <div id="story-content"></div>
+                    <div class="share-section">
+                        <label>Share Link (লিঙ্ক শেয়ার করুন):</label>
+                        <input type="text" id="story-share-link" readonly>
+                        <button onclick="copyLink('story-share-link')">Copy</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="viral-page" class="page">
+                <div class="page-header">
+                    <button class="back-btn" onclick="showPage('home-page')">❮ Back</button>
+                    <h2>Viral Videos (ভাইরাল ভিডিও)</h2>
+                </div>
+                <p>
+                    যেকোনো ধরনের ভাইরাল ভিডিওর আপডেট পেতে বা সরাসরি লিংক পেতে আমাদের টেলিগ্রাম চ্যানেলে জয়েন হয়ে থাকুন।
+                    <br/><br/>
+                    To get updates on any viral videos or to get direct links, join our Telegram channel.
+                </p>
+                <a id="telegram-link-btn" href="#" target="_blank" class="telegram-btn">
+                    <i class="fab fa-telegram-plane"></i> Join Telegram
+                </a>
+            </div>
+
+            <div id="upload-page" class="page">
+                <div class="page-header">
+                    <button class="back-btn" onclick="showPage('home-page')">❮ Back</button>
+                    <h2>Upload Your Video (আপনার ভিডিও আপলোড করুন)</h2>
+                </div>
+                <form id="upload-form">
+                    <div class="form-group">
+                        <label for="video-category">Category (ক্যাটাগরি)</label>
+                        <select id="video-category" required>
+                            <option value="" disabled selected>Select a category</option>
+                            <option value="bad_video">খারাপ ভিডিও (Bad Video)</option>
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="video-title-upload">Video Title (ভিডিও টাইটেল)</label>
+                        <input type="text" id="video-title-upload" placeholder="Enter video title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="video-link-upload">Google Drive Link (গুগল ড্রাইভ লিঙ্ক)</label>
+                        <input type="text" id="video-link-upload" placeholder="Enter Google Drive shareable link" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit (সাবমিট)</button>
+                    <p id="upload-message" style="display: none;"></p>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+    <script>
+        // Firebase configuration from your google-services.json
+        const firebaseConfig = {
+            apiKey: "AIzaSyCQMVqRi53vTJ5fk5PzJv-g-YmXVBAv4yE",
+            authDomain: "zv-777.firebaseapp.com",
+            databaseURL: "https://zv-777-default-rtdb.firebaseio.com",
+            projectId: "zv-777",
+            storageBucket: "zv-777.firebasestorage.app",
+            messagingSenderId: "961252379247",
+            appId: "1:961252379247:android:1772fc209daed126f69b9a" // Note: Using Android App ID, web app ID might be different if created separately
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const videosRef = database.ref('videos');
+        const storiesRef = database.ref('stories');
+        const configRef = database.ref('config');
+        const submissionsRef = database.ref('submissions');
+
+        // Global variables to store data
+        let allVideos = {};
+        let allStories = {};
+        let allCategories = new Set(['all']);
+
+        // --- Navigation Logic ---
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show the requested page
+            const activePage = document.getElementById(pageId);
+            if (activePage) {
+                activePage.classList.add('active');
+            }
+
+            // Reset specific views
+            if (pageId === 'watch-page') {
+                resetWatchPage();
+            }
+            if (pageId === 'story-page') {
+                resetStoryPage();
+            }
+        }
+
+        // --- URL Routing Logic ---
+        window.onload = function() {
+            // Fetch all data on load
+            fetchVideos();
+            fetchStories();
+            fetchConfig();
+
+            const params = new URLSearchParams(window.location.search);
+            const page = params.get('page');
+            const id = params.get('id');
+
+            if (page === 'video' && id) {
+                // Wait for data to be fetched
+                videosRef.child(id).once('value', snapshot => {
+                    if(snapshot.exists()) {
+                        showPage('watch-page');
+                        displayVideo(id, snapshot.val());
+                    } else {
+                        showPage('home-page');
+                    }
+                });
+            } else if (page === 'story' && id) {
+                // Wait for data to be fetched
+                storiesRef.child(id).once('value', snapshot => {
+                    if(snapshot.exists()) {
+                        showPage('story-page');
+                        displayStory(id, snapshot.val());
+                    } else {
+                        showPage('home-page');
+                    }
+                });
+            } else {
+                showPage('home-page');
+            }
+        };
+
+        // --- General Helper Functions ---
+        function copyLink(inputId) {
+            const input = document.getElementById(inputId);
+            input.select();
+            input.setSelectionRange(0, 99999); // For mobile
+            document.execCommand("copy");
+            alert("Link Copied! (লিঙ্ক কপি হয়েছে!)");
+        }
+
+        function getGDriveEmbedUrl(url) {
+            // Extracts file ID from formats:
+            // 1. .../file/d/FILE_ID/view?usp=sharing
+            // 2. .../file/d/FILE_ID/edit?usp=sharing
+            // 3. .../file/d/FILE_ID
+            const regex = /file\/d\/([\w-]+)/;
+            const match = url.match(regex);
+            if (match && match[1]) {
+                return `https://drive.google.com/file/d/${match[1]}/preview`;
+            }
+            // Fallback for direct /uc?id=FILE_ID format (less common for sharing)
+            const ucRegex = /uc\?id=([\w-]+)/;
+            const ucMatch = url.match(ucRegex);
+            if (ucMatch && ucMatch[1]) {
+                 return `https://drive.google.com/file/d/${ucMatch[1]}/preview`;
+            }
+            console.warn("Could not parse GDrive URL:", url);
+            return url; // Return original if parsing fails
+        }
+
+        // --- Config Fetching (Telegram) ---
+        function fetchConfig() {
+            configRef.child('telegram_link').on('value', snapshot => {
+                const link = snapshot.val();
+                if (link) {
+                    document.getElementById('telegram-link-btn').href = link;
+                }
+            });
+        }
+
+        // --- Watch Now Page Logic ---
+        function fetchVideos() {
+            videosRef.on('value', snapshot => {
+                allVideos = snapshot.val() || {};
+                allCategories = new Set(['all']);
+                Object.values(allVideos).forEach(video => {
+                    if (video.categories) {
+                        video.categories.forEach(cat => allCategories.add(cat));
+                    }
+                });
+                populateCategoryFilter();
+                renderVideoList();
+            });
+        }
+
+        function populateCategoryFilter() {
+            const filterSelect = document.getElementById('category-filter');
+            filterSelect.innerHTML = '<option value="all">All Categories (সব ক্যাটাগরি)</option>';
+            allCategories.forEach(cat => {
+                if (cat !== 'all') {
+                    const option = document.createElement('option');
+                    option.value = cat;
+                    option.textContent = cat;
+                    filterSelect.appendChild(option);
+                }
+            });
+        }
+
+        function filterVideos() {
+            renderVideoList();
+        }
+
+        function renderVideoList() {
+            const listEl = document.getElementById('video-list');
+            listEl.innerHTML = '';
+            const selectedCategory = document.getElementById('category-filter').value;
+
+            Object.keys(allVideos).forEach(key => {
+                const video = allVideos[key];
+                const categories = video.categories || [];
+                
+                if (selectedCategory === 'all' || categories.includes(selectedCategory)) {
+                    const item = document.createElement('div');
+                    item.className = 'video-item';
+                    item.innerHTML = `
+                        <h3>${video.title}</h3>
+                        <div class="categories">Categories: ${categories.join(', ')}</div>
+                    `;
+                    item.onclick = () => displayVideo(key, video);
+                    listEl.appendChild(item);
+                }
+            });
+        }
+
+        function displayVideo(key, video) {
+            document.getElementById('video-list-container').style.display = 'none';
+            document.getElementById('filter-container').style.display = 'none';
+            
+            const playerContainer = document.getElementById('video-player-container');
+            document.getElementById('video-title').textContent = video.title;
+            const embedUrl = getGDriveEmbedUrl(video.gdrive_link);
+            document.getElementById('video-iframe').src = embedUrl;
+            
+            const shareLink = `${window.location.origin}${window.location.pathname}?page=video&id=${key}`;
+            document.getElementById('video-share-link').value = shareLink;
+            
+            playerContainer.style.display = 'block';
+        }
+
+        function resetWatchPage() {
+            document.getElementById('video-list-container').style.display = 'block';
+            document.getElementById('filter-container').style.display = 'block';
+            document.getElementById('video-player-container').style.display = 'none';
+            document.getElementById('video-iframe').src = ''; // Stop video
+        }
+
+        // --- Story Corner Page Logic ---
+        function fetchStories() {
+            storiesRef.on('value', snapshot => {
+                allStories = snapshot.val() || {};
+                renderStoryList();
+            });
+        }
+
+        function renderStoryList() {
+            const listEl = document.getElementById('story-list');
+            listEl.innerHTML = '';
+            Object.keys(allStories).forEach(key => {
+                const story = allStories[key];
+                const item = document.createElement('li');
+                item.innerHTML = `
+                    <img src="${story.image_link}" alt="Story Image">
+                    <div>
+                        <strong>${story.title}</strong>
+                        <p>${story.content.substring(0, 100)}...</p>
+                    </div>
+                `;
+                item.onclick = () => displayStory(key, story);
+                listEl.appendChild(item);
+            });
+        }
+
+        function displayStory(key, story) {
+            document.getElementById('story-list').style.display = 'none';
+            
+            const viewer = document.getElementById('story-viewer');
+            document.getElementById('story-image').src = story.image_link;
+            document.getElementById('story-title').textContent = story.title;
+            document.getElementById('story-content').textContent = story.content; // textContent handles pre-wrap
+            
+            const shareLink = `${window.location.origin}${window.location.pathname}?page=story&id=${key}`;
+            document.getElementById('story-share-link').value = shareLink;
+            
+            viewer.style.display = 'block';
+        }
+
+        function resetStoryPage() {
+            document.getElementById('story-list').style.display = 'block';
+            document.getElementById('story-viewer').style.display = 'none';
+        }
+
+        // --- Upload Video Page Logic ---
+        document.getElementById('upload-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const category = document.getElementById('video-category').value;
+            const title = document.getElementById('video-title-upload').value;
+            const gdrive_link = document.getElementById('video-link-upload').value;
+            const messageEl = document.getElementById('upload-message');
+
+            // Save to 'submissions' node
+            submissionsRef.push({
+                category: category,
+                title: title,
+                gdrive_link: gdrive_link,
+                submittedAt: new Date().toISOString()
+            })
+            .then(() => {
+                messageEl.textContent = 'Submission successful! Admin will review it. (আপনার রিকোয়েস্ট সফল হয়েছে! অ্যাডমিন এটি পর্যালোচনা করবে।)';
+                messageEl.style.color = 'green';
+                messageEl.style.display = 'block';
+                document.getElementById('upload-form').reset();
+            })
+            .catch(error => {
+                messageEl.textContent = `Error: ${error.message}`;
+                messageEl.style.color = 'red';
+                messageEl.style.display = 'block';
+            });
+        });
+
+    </script>
+
+</body>
+</html>
